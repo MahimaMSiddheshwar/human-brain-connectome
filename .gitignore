@@ -1,0 +1,68 @@
+# Large data files - not version controlled
+data/*.npy
+data/*.nii
+data/*.nii.gz
+data/*.h5
+data/*.hdf5
+data/nilearn_data/
+data/*.zip
+
+# Downloaded datasets
+nilearn_data/
+.nilearn/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+connectome_env/
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# OS
+.DS_Store
+Thumbs.db
+.directory
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# Large figure files (optional - comment out if you want to version these)
+# figures/*.html
+# figures/*.pdf
+# figures/*.png
+
+# Results cache
+.cache/
+*.cache
+
+# Environment variables
+.env
+.env.local
+
+# Keep these important files
+!.gitignore
+!README.md
+!requirements.txt
+!*.ipynb
+!*.md
+!*.txt
