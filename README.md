@@ -8,16 +8,39 @@ Functional connectome analysis of resting-state fMRI data from 20 healthy subjec
 
 ## Tech Stack
 
+**Neuroimaging & Bioinformatics**
+
+![fMRI](https://img.shields.io/badge/fMRI-Resting_State-DC143C?style=for-the-badge&logo=databricks&logoColor=white)
+![Nilearn](https://img.shields.io/badge/Nilearn-Brain_Analysis-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
+![NiBabel](https://img.shields.io/badge/NiBabel-NIfTI_I/O-8B0000?style=for-the-badge&logo=files&logoColor=white)
+![BOLD](https://img.shields.io/badge/BOLD-Signal_Processing-FF6347?style=for-the-badge&logo=airplayvideo&logoColor=white)
+![Destrieux](https://img.shields.io/badge/Destrieux_Atlas-163_Regions-9370DB?style=for-the-badge&logo=openstreetmap&logoColor=white)
+
+**Graph Theory & Network Science**
+
+![NetworkX](https://img.shields.io/badge/NetworkX-Graph_Analysis-4C8CBF?style=for-the-badge&logo=graphql&logoColor=white)
+![Graph Theory](https://img.shields.io/badge/Graph_Theory-Centrality_Metrics-228B22?style=for-the-badge&logo=neo4j&logoColor=white)
+![Community](https://img.shields.io/badge/Community_Detection-Modularity-2E8B57?style=for-the-badge&logo=gitconnected&logoColor=white)
+![Pearson](https://img.shields.io/badge/Pearson-Correlation_Matrix-006400?style=for-the-badge&logo=stackexchange&logoColor=white)
+
+**Data Science & Computing**
+
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 ![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white)
-![scikit-learn](https://img.shields.io/badge/Nilearn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
-![NetworkX](https://img.shields.io/badge/NetworkX-4C8CBF?style=for-the-badge&logo=python&logoColor=white)
-![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
-![Seaborn](https://img.shields.io/badge/Seaborn-444876?style=for-the-badge&logo=python&logoColor=white)
 ![SciPy](https://img.shields.io/badge/SciPy-8CAAE6?style=for-the-badge&logo=scipy&logoColor=white)
+
+**Visualization**
+
+![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=plotly&logoColor=white)
+![Seaborn](https://img.shields.io/badge/Seaborn-444876?style=for-the-badge&logo=python&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-3D_Brain-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+
+**Environment**
+
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
+![Git](https://img.shields.io/badge/Git-Version_Control-F05032?style=for-the-badge&logo=git&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white)
 
 ---
 
