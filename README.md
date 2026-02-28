@@ -16,7 +16,7 @@ Functional connectome analysis of resting-state fMRI data from 20 healthy subjec
 ![Nilearn](https://img.shields.io/badge/Nilearn-Brain_Analysis-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![NiBabel](https://img.shields.io/badge/NiBabel-NIfTI_I/O-8B0000?style=for-the-badge&logo=files&logoColor=white)
 ![BOLD](https://img.shields.io/badge/BOLD-Signal_Processing-FF6347?style=for-the-badge&logo=airplayvideo&logoColor=white)
-![Destrieux](https://img.shields.io/badge/Destrieux_Atlas-163_Regions-9370DB?style=for-the-badge&logo=openstreetmap&logoColor=white)
+![Destrieux](https://img.shields.io/badge/Destrieux_Atlas-148_Regions-9370DB?style=for-the-badge&logo=openstreetmap&logoColor=white)
 
 **Graph Theory & Network Science**
 
@@ -52,7 +52,7 @@ Functional connectome analysis of resting-state fMRI data from 20 healthy subjec
 |----------|-------|
 | **Source** | ADHD-200 Resting-State fMRI |
 | **Subjects** | 20 healthy controls |
-| **Atlas** | Destrieux 2009 (163 brain regions) |
+| **Atlas** | Destrieux 2009 (148 cortical regions) |
 | **TR** | 2.5 seconds |
 | **Signal** | BOLD (Blood Oxygen Level-Dependent) |
 | **Format** | 4D NIfTI (3D brain × time) |
@@ -73,7 +73,7 @@ Functional connectome analysis of resting-state fMRI data from 20 healthy subjec
 |------|----------|-------------|
 | 01 | `01_download_and_setup.ipynb` | Fetch ADHD-200 dataset & Destrieux atlas |
 | 02 | `02_extract_signals.ipynb` | Apply `NiftiLabelsMasker` → regional time series |
-| 03 | `03_functional_connectivity.ipynb` | Pearson correlation across 20 subjects → 163×163 matrix |
+| 03 | `03_functional_connectivity.ipynb` | Pearson correlation across 20 subjects → 148×148 matrix |
 | 04 | `04_build_graph.ipynb` | Threshold at r > 0.3 → NetworkX graph |
 | 05 | `05_graph_analysis.ipynb` | Centrality metrics + community detection |
 | 06 | `06_visualization.ipynb` | Generate all figures + 3D brain connectome |
@@ -134,7 +134,7 @@ These regions act as **critical communication hubs** in the brain network — th
 
 | Figure | Description |
 |--------|-------------|
-| `figure1_connectivity_heatmap.png` | 163×163 Pearson correlation matrix |
+| `figure1_connectivity_heatmap.png` | 148×148 Pearson correlation matrix |
 | `figure2_hub_regions.png` | Top 15 hubs ranked by centrality |
 | `figure3_network_graph.png` | Spring layout network visualization |
 | `figure4_network_dashboard.png` | Network statistics dashboard |
