@@ -712,7 +712,7 @@ code {
   <div class="abstract-box">
     <div class="abstract-label">Abstract</div>
     <p class="abstract-text">
-      The human brain is a complex network where regions communicate through functionally correlated activity. In this project, I construct and analyze the functional connectome of the resting human brain using Blood Oxygen Level-Dependent (BOLD) signals from 20 healthy adults drawn from the ADHD-200 neuroimaging dataset. Applying the Destrieux 2009 cortical atlas, I extract time-series signals from 148 brain regions, compute pairwise Pearson correlations, and threshold the resulting matrix at r > 0.3 to produce a sparse graph of 414 edges. Graph-theoretic analysis identifies Region 77 as the dominant global hub (composite score = 0.82; betweenness centrality = 0.14), while Louvain community detection reveals 21 functionally distinct modules with modularity Q = 0.693 — well above the accepted significance threshold. The network exhibits small-world properties (density = 3.81%; clustering coefficient = 0.369) and strong bilateral interhemispheric synchronization, with homotopic region pairs dominating the top connections (maximum r = 0.703, Region 10 ↔ Region 84). These findings are biologically consistent with established resting-state network organization and establish a reproducible baseline for comparing healthy versus pathological connectivity.
+      The human brain is a complex network where regions communicate through functionally correlated activity. In this project, I construct and analyze the functional connectome of the resting human brain using Blood Oxygen Level-Dependent (BOLD) signals from 20 healthy adults drawn from the ADHD-200 neuroimaging dataset. Applying the Destrieux 2009 cortical atlas, I extract time-series signals from 148 brain regions, compute pairwise Pearson correlations, and threshold the resulting matrix at r > 0.3 to produce a sparse graph of 414 edges. Graph-theoretic analysis identifies Region 77 as the dominant global hub (composite score = 0.82; betweenness centrality = 0.14), while Louvain community detection reveals 21 functionally distinct modules with modularity Q = 0.693 — well above the accepted significance threshold. The network exhibits high local clustering (C = 0.3683; density = 3.81%) and strong bilateral interhemispheric synchronization visible as a secondary diagonal in the connectivity matrix. The graph is disconnected (15 components), so average path length was not computable globally. Eight cortical regions remain isolated at the r > 0.3 threshold. These findings are biologically consistent with established resting-state network organization and establish a reproducible baseline for comparing healthy versus pathological connectivity.
     </p>
     <div class="keywords">
       <strong>Keywords:</strong> functional connectome, resting-state fMRI, BOLD signal, hub regions, graph theory, Louvain modularity, Default Mode Network, small-world network, neuroimaging, ADHD-200
@@ -900,7 +900,7 @@ code {
     <div class="callout-card"><span class="callout-num">3.81%</span><span class="callout-label">Network Density</span></div>
     <div class="callout-card"><span class="callout-num">21</span><span class="callout-label">Functional Communities</span></div>
     <div class="callout-card"><span class="callout-num">0.693</span><span class="callout-label">Modularity Q</span></div>
-    <div class="callout-card"><span class="callout-num">0.369</span><span class="callout-label">Clustering Coefficient</span></div>
+    <div class="callout-card"><span class="callout-num">0.3683</span><span class="callout-label">Clustering Coefficient</span></div>
   </div>
 
   <h3 class="sub-heading" id="r-connectivity">3.1 Functional Connectivity Matrix</h3>
@@ -911,15 +911,15 @@ code {
     <div class="figure-wrap">
       <img src="figures/sample_time_series.png" alt="BOLD Time Series" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 1. BOLD Signal Time Series — Subject 0</div>
-        <div class="fig-desc">Preprocessed regional time series from one representative subject showing z-scored, bandpass-filtered BOLD fluctuations across 148 brain regions. The stable mean near zero and uniform variance confirm successful preprocessing. Note: timepoints vary per subject (range: 77–261) due to variable scan durations across the ADHD-200 dataset.</div>
+        <div class="fig-label">Figure 1. BOLD Signal Time Series — Subject 0 (Four-Panel)</div>
+        <div class="fig-desc">Four-panel visualization of preprocessed BOLD signals for Subject 0. <strong>(Top-left)</strong> Time series of 4 representative regions (R0, R37, R74, R138) plotted over ~176 TRs — each region fluctuates independently, confirming distinct functional profiles. <strong>(Top-right)</strong> Mean BOLD signal averaged across all 148 regions, showing a stable z-scored signal centered near zero with fluctuations within ±0.3. <strong>(Bottom-left)</strong> Standard deviation of signals across all regions at each timepoint, ranging 0.2–1.4, reflecting normal variability in signal amplitude over time. <strong>(Bottom-right)</strong> Scatter of mean vs. std dev per region — means cluster tightly near zero (successful z-scoring) while variability spans a wider range across regions.</div>
       </div>
     </div>
     <div class="figure-wrap">
       <img src="figures/functional_connectivity_matrix.png" alt="Connectivity Matrix" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 2. Group-Averaged Functional Connectivity Matrix</div>
-        <div class="fig-desc">148 × 148 Pearson correlation matrix averaged across 20 subjects. Red = strong positive correlation. Blue = anticorrelation. The prominent secondary diagonal reflects homotopic interhemispheric connectivity. Visible red clusters indicate functional network structure even without community reorganization.</div>
+        <div class="fig-label">Figure 2. Group-Averaged Functional Connectivity Matrix — Original and Clustered Order</div>
+        <div class="fig-desc">Two-panel 148×148 Pearson correlation matrix averaged across 20 subjects. <strong>(Left)</strong> Original atlas order (left hemisphere regions 0–73, right hemisphere 74–147) — the prominent secondary diagonal of strong red correlations confirms homotopic interhemispheric synchronization between mirror regions. A warm red background indicates widespread positive correlations, while blue patches reflect anticorrelations. <strong>(Right)</strong> Hierarchically clustered order — similar regions grouped together, revealing two large warm blocks of strongly correlated regions corresponding to the major resting-state networks, and blue off-diagonal blocks showing anticorrelation between networks. Color scale: dark red = r ≈ 1.0 (perfect correlation), white = r ≈ 0, dark blue = r ≈ −1.0.</div>
       </div>
     </div>
   </div>
@@ -929,8 +929,8 @@ code {
   <div class="figure-wrap" style="margin:28px 0;">
     <img src="figures/figure1_connectivity_heatmap.png" alt="Community-Organized Heatmap" class="figure-img" onclick="openLB(this.src)">
     <div class="figure-caption">
-      <div class="fig-label">Figure 3. Community-Organized Connectivity Matrix (Q = 0.693)</div>
-      <div class="fig-desc">The connectivity matrix reorganized so that regions belonging to the same Louvain community are grouped together. The block-diagonal structure — bright diagonal squares against a dark off-diagonal background — demonstrates strong within-community connectivity and sparse between-community coupling. The two largest blocks correspond to the Default Mode Network (~25 regions) and Sensorimotor Network (~25 regions). Modularity Q = 0.693 confirms this structure is highly non-random.</div>
+      <div class="fig-label">Figure 3. Brain Connectivity Matrix Organized by Community (21 Communities, Q = 0.693)</div>
+      <div class="fig-desc">The thresholded connectivity matrix (r > 0.3) reorganized so regions belonging to the same Louvain community are grouped together, with white grid lines marking community boundaries. The color scale runs from dark purple (r = 0.0, no connection) through cyan-green to bright yellow (r = 0.7, strongest connection). Six visually distinct diagonal blocks are clearly visible — the two largest correspond to communities spanning roughly regions 60–90 (the densest block, containing the strongest yellow connections up to r = 0.70) and regions 0–20. Smaller communities appear as tighter colored squares. The largely dark off-diagonal regions confirm sparse between-community connectivity, validating the high modularity Q = 0.693.</div>
     </div>
   </div>
 
@@ -968,8 +968,8 @@ code {
   <div class="figure-wrap">
     <img src="figures/figure2_hub_regions.png" alt="Hub Regions" class="figure-img" onclick="openLB(this.src)">
     <div class="figure-caption">
-      <div class="fig-label">Figure 4. Hub Region Centrality Profile — Top 15 Regions</div>
-      <div class="fig-desc">Four-panel bar chart showing (A) composite hub score, (B) degree centrality, (C) betweenness centrality, (D) total connection strength for the top 15 hub regions. R77 leads on hub score and betweenness while R19 and R3 lead on raw degree — reflecting the global vs local hub distinction.</div>
+      <div class="fig-label">Figure 4. Top 15 Hub Regions — Four Centrality Measures</div>
+      <div class="fig-desc">Four horizontal bar charts showing the top 15 hub regions ranked by each centrality measure. <strong>(Top-left, blue) Composite Hub Score:</strong> R77 is a clear outlier at 0.82, well ahead of R19 (0.69) and R3 (0.69) — a score gap that does not appear between ranks 2–15. <strong>(Top-right, orange) Node Degree:</strong> R19 and R3 lead with 18 connections each, with R77 close behind at 17 — unlike hub score, degree shows no single dominant outlier. <strong>(Bottom-left, green) Pathway Importance (Betweenness):</strong> R77 is the extreme outlier at 0.142, nearly 3× the next highest (R24 at 0.120) — visually the most skewed panel, confirming R77's unique role in controlling communication pathways. <strong>(Bottom-right, purple) Total Connection Strength:</strong> R19 (7.59) and R3 (7.41) lead, with R77 third (6.66) — showing that while R77 controls the most pathways, R19 and R3 have the highest cumulative connection weights.</div>
     </div>
   </div>
 
@@ -981,21 +981,21 @@ code {
     <strong>Finding:</strong> The healthy resting brain organizes into <strong>21 functional communities</strong> with modularity Q = <strong>0.693</strong>. This is substantially above the Q > 0.3 threshold for significant community structure and above the Q > 0.5 threshold for strong modularity, indicating a well-organized, non-random partition of the brain into functionally specialized groups.
   </div>
 
-  <p class="body-text">The 21 communities varied in size. The two dominant communities correspond biologically to the <strong>Default Mode Network</strong> (internally synchronized, externally anticorrelated with sensorimotor regions) and the <strong>Sensorimotor/Motor-Visual Network</strong> (regions involved in movement planning, execution, and primary sensory processing). Smaller communities likely correspond to visual, auditory, frontoparietal attention, and limbic systems. The block-diagonal structure of the reordered connectivity matrix (Figure 3) visually confirms the community organization.</p>
+  <p class="body-text">The 21 communities vary considerably in size — confirmed community sizes are: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 10, 14, 15, 18, 22, 24, 25]. The two dominant communities contain <strong>25 and 24 regions</strong> respectively — these large modules correspond biologically to the major resting-state networks: the <strong>Default Mode Network</strong> (internally synchronized, anticorrelated with sensorimotor regions) and the <strong>Sensorimotor/Motor-Visual Network</strong>. Eight singleton communities (size = 1) correspond to the 8 isolated regions that fall below the r > 0.3 threshold. The block-diagonal structure of the reordered connectivity matrix (Figure 3) visually confirms the community organization.</p>
 
   <div class="figure-grid">
     <div class="figure-wrap">
       <img src="figures/figure3_network_graph.png" alt="Network Graph" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 5. Force-Directed Network Graph</div>
-        <div class="fig-desc">Spring-layout visualization of the 148-node, 414-edge functional connectome. Node size scales with degree. Node color scales from yellow (low hub score) to dark red (high hub score). The top-ranked hub regions — R77, R19, R3, R24, R18 — occupy central positions, a geometric consequence of their high connectivity and betweenness. The dense central cluster reflects the rich-club tendency of hub nodes to be mutually connected.</div>
+        <div class="fig-label">Figure 5. Brain Connectome Network Graph — Spring Layout (148 Nodes, 414 Edges)</div>
+        <div class="fig-desc">Spring-layout (force-directed) visualization of the full functional connectome. Node size scales with degree and node color with hub score (yellow = low, dark red = high, scale 0–1.0). The top hub regions are labelled directly on the graph — R77 and R3 cluster together near the center-right, with R85 adjacent, while R24 and R101 sit further from center reflecting their lower degree but high betweenness. R18 and R93 appear as a closely positioned pair near the upper center. Many small yellow nodes at the periphery represent low-degree, low-hub-score regions. The graph is disconnected — several isolated small nodes with no edges are visible around the edges, corresponding to the 8 regions that fell below the r > 0.3 threshold.</div>
       </div>
     </div>
     <div class="figure-wrap">
       <img src="figures/figure4_network_dashboard.png" alt="Network Dashboard" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 6. Network Property Dashboard</div>
-        <div class="fig-desc">Six-panel statistical summary. (A) Degree distribution — right-skewed, consistent with scale-free hub structure. (B) Hub score distribution — exponential decay with R77 as a clear outlier at 0.82. (C) Community size histogram — dominated by two large communities with many small modules. (D) Betweenness distribution — extremely right-skewed; R77 at 0.14 is a statistical outlier. (E–F) Scatter plots of degree vs betweenness, and clustering vs hub score.</div>
+        <div class="fig-label">Figure 6. Brain Connectome Network Analysis Dashboard — Six Panels + Summary</div>
+        <div class="fig-desc">Six-panel statistical dashboard with a full network summary box at bottom. <strong>(Top-left) Degree Distribution:</strong> Right-skewed histogram — largest bar at degree 0 (31 regions), secondary peaks at degree 2–3 and degree 7, tail extending to degree 18. Mean = 5.59 (red dashed line). <strong>(Top-center) Hub Score Distribution:</strong> Most regions have hub scores 0–0.1 (peak ~22 regions), with roughly uniform frequency from 0.1–0.6, then a sharp drop. R77 appears as a lone bar near 0.82. <strong>(Top-right) Community Sizes (n=21):</strong> Communities 8 and 9 are the largest (~24–25 regions); most communities have fewer than 5 regions; several communities contain ~18 and 22 regions. <strong>(Bottom-left) Clustering Coefficient Distribution:</strong> Strongly left-skewed — over 60 regions have clustering = 0. Mean = 0.194 (red dashed line). <strong>(Bottom-center) Betweenness Distribution:</strong> ~100 regions at betweenness ≈ 0, with a long sparse tail to 0.14 (R77). <strong>(Bottom-right) Degree vs Hub Score Scatter:</strong> Strong positive correlation — higher degree → higher hub score. Color = betweenness; R77 appears as the single bright yellow outlier at top-right (degree 17, hub score 0.82, highest betweenness). <strong>Summary box:</strong> Avg Clustering = 0.1942, Avg Path Length = N/A (disconnected graph), Modularity = 0.6930.</div>
       </div>
     </div>
   </div>
@@ -1004,22 +1004,22 @@ code {
     <div class="figure-wrap">
       <img src="figures/connectome_graph_analysis.png" alt="Graph Analysis" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 7. Degree vs Betweenness Centrality</div>
-        <div class="fig-desc">Scatter plot distinguishing global hubs (high betweenness, moderate degree) from local hubs (high degree, lower betweenness). R77 is a clear outlier on the betweenness axis — it controls pathways disproportionately to its number of direct connections.</div>
+        <div class="fig-label">Figure 7. Brain Connectome Network Analysis — Degree, Strength, and Summary Statistics</div>
+        <div class="fig-desc">Three-panel figure with a network statistics summary box. <strong>(Top-left) Degree Distribution:</strong> Histogram showing the number of regions at each degree level — bimodal pattern with peaks at degree 1–2 and degree 7–8, and a tail extending to degree 18. Mean = 5.59 (red dashed line). <strong>(Top-right) Cumulative Degree Distribution:</strong> Step-function CDF — approximately 40% of regions have degree ≤ 2, and 80% have degree ≤ 8, confirming that most regions are peripherally connected. <strong>(Bottom-left) Connection Strength Distribution:</strong> Distribution of all 414 edge weights (Pearson r values) — left-skewed with most connections between r = 0.30–0.40, falling off toward r = 0.70. Mean edge weight = 0.399, maximum = 0.7029. <strong>(Summary box)</strong> Confirms: Nodes = 148, Edges = 414, Density = 0.0381, Degree median = 4.50, Clustering = 0.3683, Connected components = 15, Edge weight range = 0.3013–0.7029.</div>
       </div>
     </div>
     <div class="figure-wrap">
       <img src="figures/graph_analysis_summary.png" alt="Graph Summary" class="figure-img" onclick="openLB(this.src)">
       <div class="figure-caption">
-        <div class="fig-label">Figure 8. Hub Score Summary and Community Assignment</div>
-        <div class="fig-desc">Composite visualization showing hub score rankings alongside community color-coding. Hub regions cluster across multiple communities, confirming that the most central nodes are distributed across the network rather than confined to a single module — a hallmark of efficient brain architecture.</div>
+        <div class="fig-label">Figure 8. Brain Network Analysis Summary — Hub Rankings, Degree vs Betweenness, Community Structure</div>
+        <div class="fig-desc">Four-panel summary figure. <strong>(Top-left) Top 15 Hub Regions bar chart:</strong> R77 (0.82) is visually separated from all other regions. Ranks 2–15 form a compact cluster between 0.56–0.69, suggesting R77's dominance is qualitatively distinct. <strong>(Top-right) Degree vs Betweenness Centrality scatter:</strong> Color-coded by hub score (blue = low, yellow = high). Most regions cluster near betweenness ≈ 0 regardless of degree. R77 appears as the lone bright yellow dot at the top (betweenness = 0.142, degree = 17). R24, R18, R101 appear as medium-blue dots with high betweenness but lower degree — the global hub cluster. <strong>(Bottom-left) Community Structure histogram:</strong> Community sizes confirmed as [1,1,1,1,1,1,1,1,2,2,2,2,2,2,10,14,15,18,22,24,25] — the two largest communities contain 24 and 25 regions. Eight singleton communities confirm the isolated regions. <strong>(Summary box)</strong> Confirms: Communities = 21, Modularity = 0.693, Clustering = 0.2139, Density = 0.0381, Betweenness range = 0.0000–0.1423.</div>
       </div>
     </div>
   </div>
 
   <h3 class="sub-heading" id="r-topology">3.4 Global Network Topology</h3>
 
-  <p class="body-text">The functional connectome exhibits small-world properties — a combination of high local clustering and short global path lengths that enables efficient information transfer while maintaining local specialization. The network shows clustering coefficient C = 0.369, substantially higher than expected for a random graph with the same number of nodes and edges, consistent with small-world organization.</p>
+  <p class="body-text">The functional connectome exhibits properties consistent with modular organization — high local clustering (C = 0.3683 for connected nodes; mean 0.1942 overall) and 21 well-separated communities (Q = 0.693). The graph is <strong>disconnected</strong> (15 connected components), which means average path length could not be computed across all region pairs. The clustering coefficient of 0.3683 is substantially above what would be expected for a random sparse graph at this density (3.81%), consistent with the brain's local specialization and community structure.</p>
 
   <table class="data-table">
     <caption>Table 3.4 — Global network topology metrics</caption>
@@ -1027,20 +1027,22 @@ code {
       <tr><th>Metric</th><th>Value</th><th>Biological Interpretation</th></tr>
     </thead>
     <tbody>
-      <tr><td>Nodes (regions)</td><td>148</td><td>Cortical parcels, Destrieux 2009</td></tr>
+      <tr><td>Nodes (regions)</td><td>148</td><td>Cortical parcels, Destrieux 2009 (region IDs 0–147)</td></tr>
       <tr><td>Edges (connections)</td><td>414</td><td>Functional connections at r > 0.3</td></tr>
       <tr><td>Network density</td><td>3.81%</td><td>Sparse — metabolically efficient; brain doesn't connect everything to everything</td></tr>
-      <tr><td>Mean degree</td><td>5.59</td><td>Average connections per region; most regions are peripheral</td></tr>
-      <tr><td>Max degree</td><td>18</td><td>Regions R19 and R3 — local hubs</td></tr>
-      <tr><td>Clustering coefficient</td><td>0.369</td><td>High local clustering → modular, specialized processing</td></tr>
-      <tr><td>Connected components</td><td>15</td><td>15 subgraphs; 1 giant component + 14 small isolated clusters</td></tr>
+      <tr><td>Mean degree</td><td>5.59</td><td>Average connections per region across all 148 atlas parcels</td></tr>
+      <tr><td>Max degree</td><td>18</td><td>Regions R19 and R3 — local hubs with most direct connections</td></tr>
+      <tr><td>Clustering coefficient</td><td>0.3683</td><td>Of connected nodes only; overall mean including isolated nodes = 0.194</td></tr>
+      <tr><td>Connected components</td><td>15</td><td>1 giant component + 14 smaller subgraphs (confirmed from network statistics)</td></tr>
+      <tr><td>Isolated regions (degree = 0)</td><td>8</td><td>Regions 34, 49, 62, 108, 123, 128, 135, 136 — no connections surviving r > 0.3 threshold</td></tr>
       <tr><td>Modularity Q</td><td>0.693</td><td>Strong community structure (Q > 0.5 = strong by convention)</td></tr>
-      <tr><td>Communities detected</td><td>21</td><td>Functionally distinct brain modules</td></tr>
-      <tr><td>Top connection strength</td><td>r = 0.703 (R10 ↔ R84)</td><td>Strongest homotopic pair (bilateral mirror regions)</td></tr>
+      <tr><td>Communities detected</td><td>21</td><td>Sizes: two largest = 25 and 24 regions; eight singleton communities</td></tr>
+      <tr><td>Max edge weight</td><td>r = 0.7029</td><td>Strongest functional connection in the network; mean edge weight = 0.399</td></tr>
+      <tr><td>Top strength regions</td><td>R19 (7.59), R3 (7.41), R77 (6.66)</td><td>Cumulative weighted degree — R19 and R3 have highest total connection weight</td></tr>
     </tbody>
   </table>
 
-  <p class="body-text">The degree distribution follows a right-skewed, approximately power-law shape — most of the 148 regions have only 2–5 connections while a small minority sustain 13–18. This is the topological signature of a scale-free or hub-containing network where a few highly connected nodes serve as global coordinators. Critically, the top-10 strongest functional connections in the network are <em>all</em> homotopic pairs — answering Q4 definitively: bilateral symmetry is the dominant organizing principle of the resting brain's strongest connections.</p>
+  <p class="body-text">The degree distribution is right-skewed with a bimodal shape — peaks at degree 1–2 and degree 7–8, with a tail extending to degree 18. The cumulative distribution confirms ~40% of regions have degree ≤ 2 and ~80% have degree ≤ 8. The network has <strong>15 connected components</strong> — one giant component containing the majority of regions, plus 14 smaller subgraphs. The clustering coefficient of connected nodes is 0.3683, substantially above random expectation. All 414 edges have weights between r = 0.3013 and r = 0.7029, with a mean edge weight of 0.399 — confirming that the threshold of r > 0.3 successfully isolated genuine functional connections.</p>
 
   <h3 class="sub-heading" id="r-3d">3.5 3D Brain Connectome Visualization</h3>
 
@@ -1049,8 +1051,8 @@ code {
   <div class="figure-wrap">
     <img src="figures/figure5_brain_connectome.png" alt="Brain Connectome" class="figure-img" onclick="openLB(this.src)">
     <div class="figure-caption">
-      <div class="fig-label">Figure 9. Functional Connectome on Brain Surface — Three Anatomical Views</div>
-      <div class="fig-desc">Top 10% and top 20% of connections drawn on MNI brain surface. Three views shown: anterior (front), lateral (side), and dorsal (top). Red lines = positive functional connections; blue lines = anticorrelations. The dense interhemispheric connections (crossing the midline) confirm strong bilateral synchronization. The central convergence of many lines onto hub regions is visible in the lateral view.</div>
+      <div class="fig-label">Figure 9. Human Brain Functional Connectome on MNI Surface — Top 10% and Top 20% Connections</div>
+      <div class="fig-desc">Six brain views in two groups showing functional connections projected onto a standard MNI-space brain outline (20 subjects, Destrieux atlas, 148 regions). <strong>(Left group — Top 10% connections)</strong> and <strong>(Right group — Top 20% connections)</strong>, each showing three views: coronal (front), sagittal (side), and axial (top). Connection color encodes correlation strength — red lines = strong positive correlations (r up to 0.7); blue/grey lines = weaker or anticorrelated connections. The top 10% view shows predominantly horizontal red lines crossing the midline — directly confirming strong bilateral interhemispheric homotopic connections as the strongest in the network. Colored dots represent brain region centroids, color-coded by community. The top 20% view adds more intra-hemispheric connections visible in the sagittal and axial views. Edge weight color scale: red = +0.7, grey = 0, blue = −0.7.</div>
     </div>
   </div>
 
@@ -1077,7 +1079,7 @@ code {
 
   <p class="body-text"><strong>Q3 — DMN/Sensorimotor anticorrelation confirmed.</strong> The connectivity matrix shows clear negative off-diagonal blocks between what become the two dominant community clusters. This anticorrelation — the brain's task-negative versus task-positive competition — was first reported by Fox et al. (2005) using independent component analysis and has since been replicated across hundreds of studies. Its emergence here from a simple Pearson correlation matrix without any independent component decomposition validates both the finding and the preprocessing quality.</p>
 
-  <p class="body-text"><strong>Q4 — Bilateral symmetry confirmed.</strong> The top-10 strongest functional connections are exclusively homotopic pairs — left-right mirrors of each other. The strongest is R10 ↔ R84 (r = 0.703). This bilateral synchrony is maintained by the corpus callosum, the largest white matter tract in the brain, which provides direct anatomical connections between mirror regions. The fact that functional connectivity (temporal correlation) perfectly mirrors this anatomical arrangement provides strong cross-validation of the analysis pipeline's biological plausibility.</p>
+  <p class="body-text"><strong>Q4 — Bilateral symmetry confirmed.</strong> The connectivity matrix shows a clear secondary diagonal of strong correlations — anatomically corresponding regions in opposite hemispheres consistently synchronize at rest. This bilateral interhemispheric synchrony is a fundamental organizational principle of the resting brain, maintained by the corpus callosum which directly connects homologous regions across hemispheres. The fact that functional connectivity mirrors this anatomical arrangement provides strong cross-validation of the pipeline's biological plausibility.</p>
 
   <h3 class="sub-heading" id="d-disease">4.2 Clinical and Disease Context</h3>
 
@@ -1092,9 +1094,9 @@ code {
       <tr><td>Hub strength (R77 = 0.82)</td><td>Strong, well-defined</td><td>Alzheimer's Disease</td><td>Hub regions degrade preferentially; hub score decreases 20–40% before symptom onset</td></tr>
       <tr><td>Modularity Q = 0.693</td><td>Strong community structure</td><td>Schizophrenia</td><td>Q drops significantly; community boundaries blur; random cross-network connections proliferate</td></tr>
       <tr><td>DMN activity (balanced)</td><td>Properly anticorrelated with sensorimotor</td><td>Major Depression</td><td>DMN overactive, fails to deactivate; rumination = DMN stuck "on"; anticorrelation weakens</td></tr>
-      <tr><td>Bilateral sync (r = 0.703)</td><td>Strong homotopic connectivity</td><td>Aging / Dementia</td><td>Interhemispheric connectivity weakens progressively; early biomarker of cognitive decline</td></tr>
+      <tr><td>Bilateral sync (strong secondary diagonal)</td><td>Strong homotopic connectivity</td><td>Aging / Dementia</td><td>Interhemispheric connectivity weakens progressively; early biomarker of cognitive decline</td></tr>
       <tr><td>Density (3.81%, sparse)</td><td>Metabolically efficient</td><td>Epilepsy</td><td>Abnormal density increase in seizure-origin zones; excess synchronization → seizure propagation</td></tr>
-      <tr><td>Small-world structure (C = 0.369)</td><td>High clustering + short paths</td><td>Autism Spectrum Disorder</td><td>Over-local connectivity; reduced long-range connections; global coordination impaired</td></tr>
+      <tr><td>High clustering (C = 0.3683)</td><td>Strong local specialization</td><td>Autism Spectrum Disorder</td><td>Over-local connectivity; reduced long-range connections; global coordination impaired</td></tr>
     </tbody>
   </table>
 
@@ -1129,9 +1131,9 @@ code {
   <div class="section-num">Section 5</div>
   <h2 class="section-heading">Conclusion</h2>
 
-  <p class="body-text">This project successfully constructs and characterizes the functional connectome of the healthy resting human brain from real neuroimaging data, providing quantitative answers to all four biological research questions. Region 77 emerges as the dominant global hub (score = 0.82; betweenness = 0.14), controlling 14% of inter-regional communication pathways from a network of 148 cortical regions and 414 functional edges. The brain self-organizes into 21 functionally distinct communities with modularity Q = 0.693 — strong, biologically meaningful organization far exceeding chance. The anticipated anticorrelation between the Default Mode Network and Sensorimotor Network is directly observable in the connectivity matrix, confirming the task-negative/task-positive competition of resting brain dynamics. Bilateral interhemispheric synchronization dominates the top functional connections, with all ten strongest edges being homotopic region pairs.</p>
+  <p class="body-text">This project successfully constructs and characterizes the functional connectome of the healthy resting human brain from real neuroimaging data, providing quantitative answers to all four biological research questions. Region 77 emerges as the dominant global hub (score = 0.82; betweenness = 0.14), controlling 14% of inter-regional communication pathways from a network of 148 cortical regions and 414 functional edges. R19 and R3 lead on raw degree (18 connections each) and total connection strength (7.59 and 7.41), making them dominant local hubs. The brain self-organizes into 21 functionally distinct communities with modularity Q = 0.693. The anticipated anticorrelation between the Default Mode Network and Sensorimotor Network is directly observable in the connectivity matrix. Strong bilateral interhemispheric synchronization is confirmed by the prominent secondary diagonal pattern in the connectivity matrix. Eight cortical regions remain below the connectivity threshold.</p>
 
-  <p class="body-text">The network exhibits small-world topology — sparse (3.81% density), locally clustered (C = 0.369), with short global path lengths — consistent with the brain's evolutionary optimization for efficient communication at minimal metabolic cost. These findings are biologically plausible, internally consistent, and congruent with decades of published resting-state fMRI literature, providing confidence that the analysis pipeline is correctly implemented and the results are scientifically valid.</p>
+  <p class="body-text">The network exhibits high local clustering (C = 0.3683 for connected nodes), sparse connectivity (3.81% density), and strong modular organization (Q = 0.693) — consistent with the brain's evolutionary optimization for efficient, specialized processing. The graph is disconnected (15 components), so average path length could not be computed globally. These findings are biologically plausible, internally consistent, and congruent with decades of published resting-state fMRI literature, providing confidence that the analysis pipeline is correctly implemented and the results are scientifically valid.</p>
 
   <div class="abstract-box" style="border-left-color:var(--green); margin-top:28px;">
     <div class="abstract-label" style="color:var(--green);">Summary Statement</div>
