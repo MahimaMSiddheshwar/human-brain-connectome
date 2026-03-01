@@ -630,7 +630,7 @@ code {
     <li><a href="#results">Results</a></li>
     <li><a href="#discussion">Discussion</a></li>
     <li><a href="#future">Future Work</a></li>
-    <li><a href="quiz.html" class="nav-quiz" target="_blank">🧩 Take Quiz</a></li>
+    <li><a href="#" class="nav-quiz" onclick="openQuiz();return false;">🧩 Take Quiz</a></li>
   </ul>
 </nav>
 
@@ -712,7 +712,7 @@ code {
   <div class="abstract-box">
     <div class="abstract-label">Abstract</div>
     <p class="abstract-text">
-      The human brain is a complex network where regions communicate through functionally correlated activity. In this project, I construct and analyze the functional connectome of the resting human brain using Blood Oxygen Level-Dependent (BOLD) signals from 20 healthy adults drawn from the ADHD-200 neuroimaging dataset. Applying the Destrieux 2009 cortical atlas, I extract time-series signals from 148 brain regions, compute pairwise Pearson correlations, and threshold the resulting matrix at r > 0.3 to produce a sparse graph of 414 edges. Graph-theoretic analysis identifies Region 77 as the dominant global hub (composite score = 0.82; betweenness centrality = 0.14), while Louvain community detection reveals 21 functionally distinct modules with modularity Q = 0.693 — well above the accepted significance threshold. The network exhibits high local clustering (C = 0.3683; density = 3.81%) and strong bilateral interhemispheric synchronization visible as a secondary diagonal in the connectivity matrix. The graph is disconnected (15 components), so average path length was not computable globally. Eight cortical regions remain isolated at the r > 0.3 threshold. These findings are biologically consistent with established resting-state network organization and establish a reproducible baseline for comparing healthy versus pathological connectivity.
+      The human brain is a complex network where regions communicate through functionally correlated activity. In this project, I construct and analyze the functional connectome of the resting human brain using Blood Oxygen Level-Dependent (BOLD) signals from 20 healthy adults drawn from the ADHD-200 neuroimaging dataset. Applying the Destrieux 2009 cortical atlas, I extract time-series signals from 148 brain regions, compute pairwise Pearson correlations, and threshold the resulting matrix at r > 0.3 to produce a sparse graph of 414 edges. Graph-theoretic analysis identifies Region 77 as the dominant global hub (composite score = 0.82; betweenness centrality = 0.14), while Louvain community detection reveals 21 functionally distinct modules with modularity Q = 0.693 — well above the accepted significance threshold. The network exhibits high local clustering (C = 0.3683; density = 3.81%) and strong bilateral interhemispheric synchronization — the 6 strongest connections are all homotopic pairs, led by R10 ↔ R84 (r = 0.7029). The graph is disconnected (15 components), so average path length was not computable globally. Eight cortical regions remain isolated at the r > 0.3 threshold. These findings are biologically consistent with established resting-state network organization and establish a reproducible baseline for comparing healthy versus pathological connectivity.
     </p>
     <div class="keywords">
       <strong>Keywords:</strong> functional connectome, resting-state fMRI, BOLD signal, hub regions, graph theory, Louvain modularity, Default Mode Network, small-world network, neuroimaging, ADHD-200
@@ -981,7 +981,7 @@ code {
     <strong>Finding:</strong> The healthy resting brain organizes into <strong>21 functional communities</strong> with modularity Q = <strong>0.693</strong>. This is substantially above the Q > 0.3 threshold for significant community structure and above the Q > 0.5 threshold for strong modularity, indicating a well-organized, non-random partition of the brain into functionally specialized groups.
   </div>
 
-  <p class="body-text">The 21 communities vary considerably in size — confirmed community sizes are: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 10, 14, 15, 18, 22, 24, 25]. The two dominant communities contain <strong>25 and 24 regions</strong> respectively — these large modules correspond biologically to the major resting-state networks: the <strong>Default Mode Network</strong> (internally synchronized, anticorrelated with sensorimotor regions) and the <strong>Sensorimotor/Motor-Visual Network</strong>. Eight singleton communities (size = 1) correspond to the 8 isolated regions that fall below the r > 0.3 threshold. The block-diagonal structure of the reordered connectivity matrix (Figure 3) visually confirms the community organization.</p>
+  <p class="body-text">The 21 communities vary considerably in size: [1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 10, 14, 15, 18, 22, 24, 25]. <strong>Community 8</strong> (25 regions: R1, R10, R18, R19, R20, R21...) and <strong>Community 9</strong> (24 regions: R0, R5, R12, R13...) are the two dominant modules — these likely correspond to the major resting-state networks. Importantly, R77 and R3 both belong to <strong>Community 2</strong> (18 regions), confirming they are homotopic partners in the same functional module. R19 belongs to Community 8. Eight singleton communities (IDs: 0, 1, 3, 12, 15, 16, 17, 20) correspond to the 8 isolated regions. The block-diagonal structure of the reordered connectivity matrix (Figure 3) visually confirms this organization.</p>
 
   <div class="figure-grid">
     <div class="figure-wrap">
@@ -1079,7 +1079,7 @@ code {
 
   <p class="body-text"><strong>Q3 — DMN/Sensorimotor anticorrelation confirmed.</strong> The connectivity matrix shows clear negative off-diagonal blocks between what become the two dominant community clusters. This anticorrelation — the brain's task-negative versus task-positive competition — was first reported by Fox et al. (2005) using independent component analysis and has since been replicated across hundreds of studies. Its emergence here from a simple Pearson correlation matrix without any independent component decomposition validates both the finding and the preprocessing quality.</p>
 
-  <p class="body-text"><strong>Q4 — Bilateral symmetry confirmed.</strong> The connectivity matrix shows a clear secondary diagonal of strong correlations — anatomically corresponding regions in opposite hemispheres consistently synchronize at rest. This bilateral interhemispheric synchrony is a fundamental organizational principle of the resting brain, maintained by the corpus callosum which directly connects homologous regions across hemispheres. The fact that functional connectivity mirrors this anatomical arrangement provides strong cross-validation of the pipeline's biological plausibility.</p>
+  <p class="body-text"><strong>Q4 — Bilateral symmetry confirmed.</strong> The top 10 strongest functional connections are dominated by homotopic pairs — left-right mirrors of each other. The strongest connection in the entire network is R10 ↔ R84 (r = 0.7029), followed by R21 ↔ R95 (r = 0.6596), R64 ↔ R138 (r = 0.6581), R8 ↔ R82 (r = 0.6544), and R19 ↔ R93 (r = 0.6510). R3 ↔ R77 (r = 0.6480) — the two top-ranked global hubs — are themselves the 6th strongest homotopic pair, confirming they are anatomically mirrored regions. This bilateral synchrony is maintained by the corpus callosum connecting homologous regions across hemispheres.</p>
 
   <h3 class="sub-heading" id="d-disease">4.2 Clinical and Disease Context</h3>
 
@@ -1094,7 +1094,7 @@ code {
       <tr><td>Hub strength (R77 = 0.82)</td><td>Strong, well-defined</td><td>Alzheimer's Disease</td><td>Hub regions degrade preferentially; hub score decreases 20–40% before symptom onset</td></tr>
       <tr><td>Modularity Q = 0.693</td><td>Strong community structure</td><td>Schizophrenia</td><td>Q drops significantly; community boundaries blur; random cross-network connections proliferate</td></tr>
       <tr><td>DMN activity (balanced)</td><td>Properly anticorrelated with sensorimotor</td><td>Major Depression</td><td>DMN overactive, fails to deactivate; rumination = DMN stuck "on"; anticorrelation weakens</td></tr>
-      <tr><td>Bilateral sync (strong secondary diagonal)</td><td>Strong homotopic connectivity</td><td>Aging / Dementia</td><td>Interhemispheric connectivity weakens progressively; early biomarker of cognitive decline</td></tr>
+      <tr><td>Bilateral sync (R10↔R84, r=0.703)</td><td>Strong homotopic connectivity — top 6 connections are all homotopic pairs</td><td>Aging / Dementia</td><td>Interhemispheric connectivity weakens progressively; early biomarker of cognitive decline</td></tr>
       <tr><td>Density (3.81%, sparse)</td><td>Metabolically efficient</td><td>Epilepsy</td><td>Abnormal density increase in seizure-origin zones; excess synchronization → seizure propagation</td></tr>
       <tr><td>High clustering (C = 0.3683)</td><td>Strong local specialization</td><td>Autism Spectrum Disorder</td><td>Over-local connectivity; reduced long-range connections; global coordination impaired</td></tr>
     </tbody>
@@ -1131,7 +1131,7 @@ code {
   <div class="section-num">Section 5</div>
   <h2 class="section-heading">Conclusion</h2>
 
-  <p class="body-text">This project successfully constructs and characterizes the functional connectome of the healthy resting human brain from real neuroimaging data, providing quantitative answers to all four biological research questions. Region 77 emerges as the dominant global hub (score = 0.82; betweenness = 0.14), controlling 14% of inter-regional communication pathways from a network of 148 cortical regions and 414 functional edges. R19 and R3 lead on raw degree (18 connections each) and total connection strength (7.59 and 7.41), making them dominant local hubs. The brain self-organizes into 21 functionally distinct communities with modularity Q = 0.693. The anticipated anticorrelation between the Default Mode Network and Sensorimotor Network is directly observable in the connectivity matrix. Strong bilateral interhemispheric synchronization is confirmed by the prominent secondary diagonal pattern in the connectivity matrix. Eight cortical regions remain below the connectivity threshold.</p>
+  <p class="body-text">This project successfully constructs and characterizes the functional connectome of the healthy resting human brain from real neuroimaging data, providing quantitative answers to all four biological research questions. Region 77 emerges as the dominant global hub (score = 0.82; betweenness = 0.14), controlling 14% of inter-regional communication pathways from a network of 148 cortical regions and 414 functional edges. R19 and R3 lead on raw degree (18 connections each) and total connection strength (7.59 and 7.41), making them dominant local hubs. The brain self-organizes into 21 functionally distinct communities with modularity Q = 0.693. The anticipated anticorrelation between the Default Mode Network and Sensorimotor Network is directly observable in the connectivity matrix. Strong bilateral interhemispheric synchronization is confirmed — the top 6 strongest connections are all homotopic pairs, with R10 ↔ R84 the strongest at r = 0.7029. Eight cortical regions remain below the connectivity threshold.</p>
 
   <p class="body-text">The network exhibits high local clustering (C = 0.3683 for connected nodes), sparse connectivity (3.81% density), and strong modular organization (Q = 0.693) — consistent with the brain's evolutionary optimization for efficient, specialized processing. The graph is disconnected (15 components), so average path length could not be computed globally. These findings are biologically plausible, internally consistent, and congruent with decades of published resting-state fMRI literature, providing confidence that the analysis pipeline is correctly implemented and the results are scientifically valid.</p>
 
@@ -1341,5 +1341,135 @@ function closeLB() {
 }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLB(); });
 </script>
+
 </body>
 </html>
+
+<!-- QUIZ MODAL -->
+<style>
+#qz-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);overflow-y:auto;padding:40px 20px;}
+#qz-box{background:#fafaf8;border-radius:12px;max-width:780px;margin:0 auto;padding:40px 44px 48px;box-shadow:0 24px 64px rgba(0,0,0,0.25);font-family:'Source Sans 3',system-ui,sans-serif;position:relative;}
+#qz-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:22px;cursor:pointer;color:#78716c;}
+#qz-close:hover{color:#1c1917;}
+.qz-title{font-family:'Lora',Georgia,serif;font-size:22px;font-weight:700;margin-bottom:4px;color:#1c1917;}
+.qz-sub{font-size:14px;color:#78716c;margin-bottom:24px;}
+.qz-prog{height:4px;background:#e7e5e4;border-radius:2px;margin-bottom:28px;}
+.qz-prog-bar{height:100%;background:#1d4ed8;border-radius:2px;width:0%;transition:width 0.3s;}
+.qz-card{border:1px solid #e7e5e4;border-radius:10px;margin-bottom:18px;overflow:hidden;}
+.qz-card.right{border-color:#86efac;}
+.qz-card.wrong{border-color:#fca5a5;}
+.qz-head{padding:16px 20px 12px;border-bottom:1px solid #e7e5e4;}
+.qz-sec{font-size:11px;font-weight:700;color:#1d4ed8;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:5px;}
+.qz-q{font-size:15px;color:#1c1917;line-height:1.5;font-weight:500;}
+.qz-opts{padding:12px 20px 16px;display:flex;flex-direction:column;gap:7px;}
+.qz-btn{display:flex;align-items:flex-start;gap:11px;padding:9px 13px;border:1.5px solid #e7e5e4;border-radius:7px;cursor:pointer;background:#fff;font-size:14px;color:#1c1917;text-align:left;width:100%;}
+.qz-btn:hover:not([disabled]){border-color:#93c5fd;background:#eff6ff;}
+.qz-btn[disabled]{cursor:default;}
+.qz-btn.correct{border-color:#15803d;background:#f0fdf4;color:#14532d;}
+.qz-btn.wrong{border-color:#b91c1c;background:#fef2f2;color:#7f1d1d;}
+.qz-ltr{min-width:24px;height:24px;border-radius:50%;background:#e7e5e4;color:#44403c;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.qz-btn.correct .qz-ltr{background:#15803d;color:white;}
+.qz-btn.wrong .qz-ltr{background:#b91c1c;color:white;}
+.qz-exp{display:none;margin:2px 20px 16px;padding:12px 15px;border-radius:7px;font-size:13.5px;line-height:1.55;}
+.qz-exp.ok{display:block;background:#f0fdf4;border:1px solid #86efac;color:#166534;}
+.qz-exp.no{display:block;background:#fef2f2;border:1px solid #fca5a5;color:#991b1b;}
+#qz-result{display:none;text-align:center;padding:20px 0;}
+.qz-big{font-size:52px;font-weight:800;color:#1d4ed8;font-family:'Lora',Georgia,serif;}
+.qz-rlabel{font-size:15px;color:#78716c;margin-bottom:10px;}
+.qz-rmsg{font-size:18px;font-weight:600;color:#1c1917;margin-bottom:24px;}
+.qz-restart{background:#1d4ed8;color:white;border:none;padding:12px 32px;border-radius:7px;font-size:15px;font-weight:600;cursor:pointer;}
+.qz-restart:hover{background:#1e40af;}
+</style>
+
+<div id="qz-overlay" onclick="if(event.target===this)closeQz()">
+  <div id="qz-box">
+    <button id="qz-close" onclick="closeQz()">&#x2715;</button>
+    <div class="qz-title">&#x1F9E9; Project Quiz</div>
+    <div class="qz-sub">10 questions on dataset, methods, results and biological interpretation</div>
+    <div class="qz-prog"><div class="qz-prog-bar" id="qzbar"></div></div>
+    <div id="qz-qs"></div>
+    <div id="qz-result">
+      <div class="qz-big" id="qz-score">0/10</div>
+      <div class="qz-rlabel">correct answers</div>
+      <div class="qz-rmsg" id="qz-msg"></div>
+      <button class="qz-restart" onclick="buildQz()">&#x21BA; Retake Quiz</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var QZ=[
+{s:"Dataset",q:"What type of fMRI data was used in this project, and why?",o:["Task-based fMRI — subjects performed a memory task","Resting-state fMRI — subjects lay still doing nothing","Diffusion MRI — white matter tract imaging","EEG — electrical brain activity recording"],c:1,e:"Resting-state fMRI captures the brain's intrinsic functional architecture — the baseline organization independent of any task. It is more reproducible across subjects than task-based fMRI, making it ideal for mapping the brain's fundamental connectivity structure."},
+{s:"Dataset",q:"How many subjects and brain regions were analyzed?",o:["10 subjects, 90 regions (AAL atlas)","20 subjects, 148 regions (Destrieux atlas)","50 subjects, 360 regions (HCP atlas)","20 subjects, 268 regions (Shen atlas)"],c:1,e:"20 healthy control subjects from the ADHD-200 dataset were analyzed. The Destrieux 2009 atlas divides the cortex into 148 anatomically defined regions (74 per hemisphere)."},
+{s:"Methods",q:"Why is bandpass filtering (0.01-0.1 Hz) applied to the BOLD signal?",o:["To amplify the signal and make it easier to detect","To remove neural activity and isolate physiological noise","To retain neural fluctuation frequencies and remove heartbeat/breathing noise","To align signals across subjects with different scan lengths"],c:2,e:"Neural resting-state fluctuations occur in the 0.01-0.1 Hz range. Bandpass filtering retains this range while suppressing physiological noise: heartbeat (~1 Hz), breathing (~0.3 Hz), and scanner drift (<0.01 Hz)."},
+{s:"Methods",q:"Why was a threshold of r > 0.3 applied to the correlation matrix?",o:["To retain the top 3.81% of connections arbitrarily","Because correlations below 0.3 are indistinguishable from fMRI noise at standard scanning durations","To match the number of connections in published papers exactly","Because NetworkX can only handle sparse matrices"],c:1,e:"r > 0.3 is an established empirical threshold in resting-state fMRI. Below this value, correlations are statistically unreliable given typical scan durations. This reduced 10,878 possible connections to 414 reliable edges (3.81% density)."},
+{s:"Results - Hubs",q:"Region 77 has betweenness centrality of 0.14. What does this mean?",o:["Region 77 has 14 direct connections to other regions","14% of Region 77's time series is explained by noise","14.2% of all shortest communication paths in the network pass through Region 77","Region 77 is in the 14th percentile of hub scores"],c:2,e:"Betweenness centrality = the fraction of all shortest paths between every pair of nodes that pass through a given node. R77's value of 0.14 means 14.2% of all inter-regional communication routes pass through this single region."},
+{s:"Results - Hubs",q:"What is the key difference between R77 (rank 1) and R19 (rank 2)?",o:["R77 is in the left hemisphere; R19 is in the right hemisphere","R77 has more direct connections than R19","R19 has the highest raw degree (18) but lower betweenness — locally influential. R77 controls more inter-community pathways — globally influential","R77 and R19 are identical in all centrality measures"],c:2,e:"R19 has degree=18 (most direct connections) but moderate betweenness — a local hub. R77 has degree=17 but betweenness=0.14, sitting at strategic intersections between communities and controlling global communication flow."},
+{s:"Results - Communities",q:"Louvain algorithm produced modularity Q = 0.693. What does this indicate?",o:["Weak community structure — close to random wiring","Moderate structure — some communities but mostly random","Strong community structure — regions connect ~3.5x more within communities than expected by chance","Perfect structure — all connections are within communities"],c:2,e:"Q = 0.693 means roughly 3.5x more within-community connections than chance — well above the Q > 0.3 significance threshold and Q > 0.5 strong threshold. The 21 communities are highly non-random groupings."},
+{s:"Results - Connectivity",q:"The strongest functional connection is R10 to R84 (r = 0.7029). What type of connection is this?",o:["A long-range intra-hemispheric connection","A homotopic interhemispheric connection — anatomically mirrored regions in opposite hemispheres","A random strong correlation with no anatomical basis","A connection between two hub regions in the same community"],c:1,e:"R10 and R84 are homotopic mirrors — the same anatomical region in left (R10) and right (R84) hemispheres. Homotopic interhemispheric connectivity is the strongest pattern in resting-state fMRI, grounded in direct corpus callosum connections."},
+{s:"Discussion - Disease",q:"In Alzheimer's disease, which specific aspect of the connectome degrades first?",o:["Peripheral low-degree regions disconnect first","The bilateral homotopic connections strengthen pathologically","Hub regions degrade preferentially — often before clinical symptoms appear","Modularity Q increases as communities become more rigid"],c:2,e:"Hub regions are preferentially vulnerable in Alzheimer's disease due to their high metabolic activity. They accumulate amyloid plaques and tau tangles first — measurable in resting-state fMRI before symptoms appear on cognitive tests."},
+{s:"Discussion - Network",q:"R77 and R3 are both in Community 2 (18 regions). What does this reveal?",o:["They are unrelated regions placed in the same community by chance","They are homotopic mirrors — the same anatomical structure in opposite hemispheres, forming a functional unit","R77 and R3 are the same region mislabelled","Community 2 contains all hub regions"],c:1,e:"R3 (index 3, left hemisphere) and R77 (index 74+3, right hemisphere) are homotopic mirrors in the Destrieux atlas. Their co-membership in Community 2 confirms they form a bilateral functional unit — they also share the 6th strongest connection (r = 0.648)."}
+];
+
+var qzOk=0,qzDone=0;
+
+function openQuiz(){
+  document.getElementById('qz-overlay').style.display='block';
+  document.body.style.overflow='hidden';
+  buildQz();
+}
+function closeQz(){
+  document.getElementById('qz-overlay').style.display='none';
+  document.body.style.overflow='';
+}
+function buildQz(){
+  qzOk=0;qzDone=0;
+  document.getElementById('qz-result').style.display='none';
+  document.getElementById('qzbar').style.width='0%';
+  var c=document.getElementById('qz-qs');
+  c.style.display='block';
+  c.innerHTML='';
+  var L=['A','B','C','D'];
+  for(var i=0;i<QZ.length;i++){
+    var q=QZ[i];
+    var div=document.createElement('div');
+    div.className='qz-card';
+    div.id='qzcard'+i;
+    var btns='';
+    for(var j=0;j<q.o.length;j++){
+      btns+='<button class="qz-btn" id="qzbtn'+i+'_'+j+'" onclick="qzPick('+i+','+j+')"><span class="qz-ltr">'+L[j]+'</span><span>'+q.o[j]+'</span></button>';
+    }
+    div.innerHTML='<div class="qz-head"><div class="qz-sec">'+q.s+'</div><div class="qz-q">Q'+(i+1)+'. '+q.q+'</div></div><div class="qz-opts" id="qzopts'+i+'">'+btns+'</div><div class="qz-exp" id="qzexp'+i+'">'+q.e+'</div>';
+    c.appendChild(div);
+  }
+}
+function qzPick(qi,chosen){
+  var q=QZ[qi];
+  for(var j=0;j<q.o.length;j++){
+    document.getElementById('qzbtn'+qi+'_'+j).disabled=true;
+  }
+  var exp=document.getElementById('qzexp'+qi);
+  if(chosen===q.c){
+    document.getElementById('qzbtn'+qi+'_'+chosen).className='qz-btn correct';
+    exp.className='qz-exp ok';
+    document.getElementById('qzcard'+qi).className='qz-card right';
+    qzOk++;
+  } else {
+    document.getElementById('qzbtn'+qi+'_'+chosen).className='qz-btn wrong';
+    document.getElementById('qzbtn'+qi+'_'+q.c).className='qz-btn correct';
+    exp.className='qz-exp no';
+    document.getElementById('qzcard'+qi).className='qz-card wrong';
+  }
+  qzDone++;
+  document.getElementById('qzbar').style.width=Math.round(qzDone/QZ.length*100)+'%';
+  if(qzDone===QZ.length){setTimeout(showQzResult,600);}
+}
+function showQzResult(){
+  document.getElementById('qz-qs').style.display='none';
+  document.getElementById('qz-result').style.display='block';
+  document.getElementById('qz-score').textContent=qzOk+'/'+QZ.length;
+  var msgs=['Keep reading the article and try again!','Good effort — review the results section!','Getting there — you know the basics!','Great work — solid understanding!','Excellent — you know this project well!','Perfect score! You know this project inside out!'];
+  document.getElementById('qz-msg').textContent=msgs[Math.min(Math.floor(qzOk/2),5)];
+  document.getElementById('qz-overlay').scrollTop=0;
+}
+</script>
